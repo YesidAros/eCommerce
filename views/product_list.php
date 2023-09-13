@@ -156,17 +156,17 @@ $conexion = new Conexion();
                 
                 if ($result > 0) {
                     while ($data = mysqli_fetch_assoc($query)) { ?>
-                        <div class="col mb-5 productos" category="<?php echo $data['categoria']; ?>">
+                        <div class="col mb-5 productos" category="<?php echo $data['nombre_producto']; ?>">
                             <div class="card h-100">
                                 <!-- Sale badge-->
                                 <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><?php echo ($data['precio']); ?></div>
                                 <!-- Product image-->
-                                <img class="card-img-top" src="assets/img/<?php echo $data['imagen']; ?>" alt="..." />
+                                <img class="card-img-top" src="images/<?php echo $data['imagen']; ?>" alt="..." />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder"><?php echo $data['nombre'] ?></h5>
+                                        <h5 class="fw-bolder"><?php echo $data['nombre_producto'] ?></h5>
                                         <p><?php echo $data['descripcion']; ?></p>
                                         <!-- Product reviews-->
                                         <div class="d-flex justify-content-center small text-warning mb-2">
@@ -182,7 +182,8 @@ $conexion = new Conexion();
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto agregar" data-id="<?php echo $data['id']; ?>" href="#">Agregar</a></div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto Detalle" data-id="<?php echo $data['id_producto']; ?>" href="#">Ver Detalle</a></div>
                                 </div>
                             </div>
                         </div>
@@ -193,3 +194,14 @@ $conexion = new Conexion();
         </div>
     </section>
 </body>
+<script>
+    $(function(){
+        $('.Detalle').click(function(){
+            $.post('index.php',{c:'peticiones',m:'pregunta',id_producto:$(this).attr('data-id') })
+            .done(function(msg){
+                $('#Producto').html(msg);
+            })
+            .fail(function(){})
+        })
+    })
+</script>

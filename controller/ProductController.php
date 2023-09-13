@@ -22,7 +22,14 @@ class ProductController {
     public function detalle($productId) {
         // Obtener detalles de un producto por su ID
         $product = $this->productModel->getProductById($productId);
+        include 'views/product_detail.php';
 
+        // Lógica para cargar la vista y mostrar los detalles del producto
+    }
+    function pregunta() {
+        //echo "esto es una prueba";
+        include 'views/product_detail.php';
+        // Obtener detalles de un producto por su ID
         // Lógica para cargar la vista y mostrar los detalles del producto
     }
 
